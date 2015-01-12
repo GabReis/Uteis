@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/04/2013 16:45:26 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="PacotePrincipal.Setor" table="SETOR">
+    <id name="codsetor" type="int">
+      <column name="CODSETOR"/>
+      <generator class="increment"/>
+    </id>
+    <property name="setor" type="string">
+      <column length="50" name="SETOR" not-null="true"/>
+    </property>
+    <set inverse="true" name="funcionarios">
+      <key>
+        <column name="CODSETOR" not-null="true"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Funcionario"/>
+    </set>
+  </class>
+  <query name = "BuscaSetorPeloNome">
+        <![CDATA[from Setor s where s.setor = :setorRecebido]]>
+    </query>
+</hibernate-mapping>

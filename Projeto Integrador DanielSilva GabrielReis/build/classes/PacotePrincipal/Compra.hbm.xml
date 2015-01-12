@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/04/2013 16:45:26 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="PacotePrincipal.Compra" table="COMPRA">
+    <id name="codcompra" type="int">
+      <column name="CODCOMPRA"/>
+      <generator class="increment"/>
+    </id>
+    <many-to-one class="PacotePrincipal.Funcionario" fetch="select" name="funcionario">
+      <column name="CODFUNCIONARIO" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="PacotePrincipal.Fornecedor" fetch="select" name="fornecedor">
+      <column name="CODFORNECEDOR" not-null="true"/>
+    </many-to-one>
+    <property name="datacompra" type="date">
+      <column length="10" name="DATACOMPRA" not-null="true"/>
+    </property>
+    <set inverse="true" name="veiculos">
+      <key>
+        <column name="CODCOMPRA" not-null="true"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Veiculo"/>
+    </set>
+  </class>
+  <query name="BuscaCompraPorCodCompra">
+        <![CDATA[from Compra c where c.codcompra = :codCompraRecebido]]>
+        
+    </query>
+</hibernate-mapping>

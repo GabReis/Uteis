@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/04/2013 16:45:26 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="PacotePrincipal.Promocaoveiculo" table="PROMOCAOVEICULO">
+    <composite-id class="PacotePrincipal.PromocaoveiculoId" name="id">
+      <key-property name="codpromocao" type="int">
+        <column name="CODPROMOCAO"/>
+      </key-property>
+      <key-property name="codveiculo" type="int">
+        <column name="CODVEICULO"/>
+      </key-property>
+    </composite-id>
+    <many-to-one class="PacotePrincipal.Veiculo" fetch="select" insert="false" name="veiculo" update="false">
+      <column name="CODVEICULO" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="PacotePrincipal.Promocao" fetch="select" insert="false" name="promocao" update="false">
+      <column name="CODPROMOCAO" not-null="true"/>
+    </many-to-one>
+    <property name="mapear" type="java.lang.Integer">
+      <column name="MAPEAR"/>
+    </property>
+  </class>
+</hibernate-mapping>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/04/2013 16:45:26 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="PacotePrincipal.Promocao" table="PROMOCAO">
+    <id name="codpromocao" type="int">
+      <column name="CODPROMOCAO"/>
+      <generator class="increment"/>
+    </id>
+    <property name="datafimpromocao" type="date">
+      <column length="10" name="DATAFIMPROMOCAO" not-null="true"/>
+    </property>
+    <property name="descricao" type="string">
+      <column length="500" name="DESCRICAO"/>
+    </property>
+    <property name="datainiciopromocao" type="date">
+      <column length="10" name="DATAINICIOPROMOCAO" not-null="true"/>
+    </property>
+    <property name="percentualdesconto" type="big_decimal">
+      <column name="PERCENTUALDESCONTO" not-null="true" precision="3" scale="3"/>
+    </property>
+    <property name="tipopromocao" type="int">
+      <column name="TIPOPROMOCAO" not-null="true"/>
+    </property>
+    <set inverse="true" name="promocaoveiculos">
+      <key>
+        <column name="CODPROMOCAO" not-null="true"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Promocaoveiculo"/>
+    </set>
+  </class>
+  <query name = "BuscaPromocaoPorData">
+        <![CDATA[from Promocao p where p.datainiciopromocao <= :dataRecebida  and p.datafimpromocao >= :dataRecebida]]>
+        
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/04/2013 16:45:26 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="PacotePrincipal.Venda" table="VENDA">
+    <id name="codvenda" type="int">
+      <column name="CODVENDA"/>
+      <generator class="increment"/>
+    </id>
+    <many-to-one class="PacotePrincipal.Cliente" fetch="select" name="cliente">
+      <column name="CODCLIENTE" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="PacotePrincipal.Funcionario" fetch="select" name="funcionario">
+      <column name="CODFUNCIONARIO" not-null="true"/>
+    </many-to-one>
+    <property name="datavenda" type="date">
+      <column length="10" name="DATAVENDA" not-null="true"/>
+    </property>
+    <set inverse="true" name="veiculos">
+      <key>
+        <column name="CODVENDA"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Veiculo"/>
+    </set>
+  </class>
+  <query name = "BuscaVendaPorCodVenda">
+        <![CDATA[from Venda v where v.codvenda = :codVendaRecebido]]>
+    </query>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/04/2013 16:45:26 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="PacotePrincipal.Manutencao" table="MANUTENCAO">
+    <id name="codmanutencao" type="int">
+      <column name="CODMANUTENCAO"/>
+      <generator class="increment"/>
+    </id>
+    <many-to-one class="PacotePrincipal.Veiculo" fetch="select" name="veiculo">
+      <column name="CODVEICULO" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="PacotePrincipal.Funcionario" fetch="select" name="funcionario">
+      <column name="CODFUNCIONARIO" not-null="true"/>
+    </many-to-one>
+    <property name="preco" type="big_decimal">
+      <column name="PRECO" not-null="true" precision="6" scale="3"/>
+    </property>
+    <property name="datamanutencao" type="date">
+      <column length="10" name="DATAMANUTENCAO" not-null="true"/>
+    </property>
+    <property name="descricao" type="string">
+      <column length="600" name="DESCRICAO" not-null="true"/>
+    </property>
+  </class>
+  <query name ="BuscaManutencaoPorCodManutencao">
+        <![CDATA[from Manutencao m where m.codmanutencao = :codManutencaoRecebido]]>
+    </query>
+</hibernate-mapping>

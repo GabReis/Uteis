@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/04/2013 16:45:26 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="PacotePrincipal.Taxa" table="TAXA">
+    <id name="codtaxa" type="int">
+      <column name="CODTAXA"/>
+      <generator class="increment"/>
+    </id>
+    <many-to-one class="PacotePrincipal.Tipoveiculo" fetch="select" name="tipoveiculo">
+      <column name="CODTIPOVEICULO"/>
+    </many-to-one>
+    <property name="datafinaltaxa" type="date">
+      <column length="10" name="DATAFINALTAXA" not-null="true"/>
+    </property>
+    <property name="datainicialtaxa" type="date">
+      <column length="10" name="DATAINICIALTAXA" not-null="true"/>
+    </property>
+    <property name="valortaxa" type="big_decimal">
+      <column name="VALORTAXA" not-null="true" precision="6" scale="3"/>
+    </property>
+    <property name="tipotaxa" type="string">
+      <column length="50" name="TIPOTAXA" not-null="true"/>
+    </property>
+    <set inverse="true" name="taxaaluguels">
+      <key>
+        <column name="CODTAXA" not-null="true"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Taxaaluguel"/>
+    </set>
+  </class>
+</hibernate-mapping>

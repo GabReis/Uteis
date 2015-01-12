@@ -1,0 +1,23 @@
+1. Tela de compras
+Objetivo: cadastrar o veículo recém-comprado pela empresa
+Descrição: contém todas as informações relevantes para o sistema referente ao veículo. Toda vez que um veículo é comprado, ele é cadastrado no sistema utilizando esta tela. Existe o botão para cancelar a compra do veículo e um botão para apagar todas as informações digitadas anteriormente.
+O botão “Informar fornecedor” redireciona o sistema para uma tela de cadastro de pessoas para informar os dados da pessoa (física ou jurídica) que forneceu o veículo. Após isso, as informações são gravadas e anexadas no sistema.
+
+2. Tela de vendas
+Objetivo: efetuar a venda de um veículo, o excluindo do sistema.       
+Descrição: nessa tela existe um campo de texto para o funcionário informar a placa do veículo e um botão para confirmar a placa informada. Ao confirmar, o sistema fará uma busca no sistema procurando o veículo com a mesma placa. Se ele não encontrar, o sistema exibe uma mensagem de erro, caso encontre, o sistema passa todas as informações do veículo (não incluindo as informações do fornecedor) em um painel de texto logo abaixo.
+
+3. Tela de login
+Objetivo: efetuar a validação de acesso de um funcionário ao sistema
+Descrição: é uma tela simples, contendo apenas dois campos de textos: um para informar o login e outro para informar uma senha. Quando um usuário informa estes dois campos, o sistema valida o acesso ou não do usuário.
+
+4. Tela do diretor
+Objetivo: o diretor acessa informações restritas ao acesso de um funcionário comum
+Descrição: existem três botões nessa tela: histórico de veículos para o diretor ver o custo benefício dos veículos cadastrados no sistema, cadastrar promoções para o diretor criar novas promoções para a locadora e dados de promoções para o diretor buscar, atualizar ou excluir promoções já cadastradas.
+ 
+5. Tela inicial
+Objetivo: o funcionário acessa as principais funcionalidades do sistema
+Descrição: existem botões para comprar, vender, alugar, receber veículos locados veículos, entrar no setor de cobrança, cadastrar cliente e ver os carros disponíveis no sistema.
+
+6. Tela de recepção de veículo
+Objetivo: fornecer informações do veículo que  

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/04/2013 16:45:26 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="PacotePrincipal.Funcionario" table="FUNCIONARIO">
+    <id name="codfuncionario" type="int">
+      <column name="CODFUNCIONARIO"/>
+      <generator class="increment"/>
+    </id>
+    <many-to-one class="PacotePrincipal.Setor" fetch="select" name="setor">
+      <column name="CODSETOR" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="PacotePrincipal.Endereco" fetch="select" name="endereco">
+      <column name="CODENDERECO" not-null="true"/>
+    </many-to-one>
+    <property name="datanascimento" type="date">
+      <column length="10" name="DATANASCIMENTO" not-null="true"/>
+    </property>
+    <property name="cpf" type="string">
+      <column length="20" name="CPF"/>
+    </property>
+    <property name="nome" type="string">
+      <column length="150" name="NOME" not-null="true"/>
+    </property>
+    <property name="senha" type="string">
+      <column length="100" name="SENHA" not-null="true"/>
+    </property>
+    <property name="login" type="string">
+      <column length="100" name="LOGIN" not-null="true"/>
+    </property>
+    <property name="numendereco" type="int">
+      <column name="NUMENDERECO" not-null="true"/>
+    </property>
+    <property name="tipo" type="string">
+      <column length="15" name="TIPO" not-null="true"/>
+    </property>
+    <property name="telefone" type="string">
+      <column length="25" name="TELEFONE" not-null="true"/>
+    </property>
+    <set inverse="true" name="manutencaos">
+      <key>
+        <column name="CODFUNCIONARIO" not-null="true"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Manutencao"/>
+    </set>
+    <set inverse="true" name="aluguels">
+      <key>
+        <column name="CODFUNCIONARIO" not-null="true"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Aluguel"/>
+    </set>
+    <set inverse="true" name="vendas">
+      <key>
+        <column name="CODFUNCIONARIO" not-null="true"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Venda"/>
+    </set>
+    <set inverse="true" name="compras">
+      <key>
+        <column name="CODFUNCIONARIO" not-null="true"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Compra"/>
+    </set>
+  </class>
+  
+  <query name="fazerLogin">
+      <![CDATA[from Funcionario f where f.login = :login and f.senha = :senha]]>
+  </query>
+  <query name = "BuscaFuncionarioPorCpf">
+        <![CDATA[from Funcionario f where f.cpf = :cpfRecebido]]>
+    </query>
+</hibernate-mapping>

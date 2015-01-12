@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/04/2013 16:45:26 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="PacotePrincipal.Veiculo" table="VEICULO">
+    <id name="codveiculo" type="int">
+      <column name="CODVEICULO"/>
+      <generator class="increment"/>
+    </id>
+    <many-to-one class="PacotePrincipal.Tipoveiculo" fetch="select" name="tipoveiculo">
+      <column name="CODTIPOVEICULO" not-null="false"/>
+    </many-to-one>
+    <many-to-one class="PacotePrincipal.Compra" fetch="select" name="compra">
+      <column name="CODCOMPRA" not-null="false"/>
+    </many-to-one>
+    <many-to-one class="PacotePrincipal.Venda" fetch="select" name="venda">
+      <column name="CODVENDA"/>
+    </many-to-one>
+    <property name="combustivel" type="string">
+      <column length="20" name="COMBUSTIVEL"/>
+    </property>
+    <property name="modelo" type="string">
+      <column length="20" name="MODELO"/>
+    </property>
+    <property name="kilometragem" type="big_decimal">
+      <column name="KILOMETRAGEM" not-null="false" precision="9" scale="3"/>
+    </property>
+    <property name="chassi" type="string">
+      <column length="25" name="CHASSI"/>
+    </property>
+    <property name="status" type="string">
+      <column length="25" name="STATUS" not-null="false"/>
+    </property>
+    <property name="cor" type="string">
+      <column length="20" name="COR"/>
+    </property>
+    <property name="ano" type="java.lang.Integer">
+      <column name="ANO"/>
+    </property>
+    <property name="placa" type="string">
+      <column length="9" name="PLACA" not-null="false"/>
+    </property>
+    <set inverse="true" name="manutencaos">
+      <key>
+        <column name="CODVEICULO" not-null="false"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Manutencao"/>
+    </set>
+    <set inverse="true" name="promocaoveiculos">
+      <key>
+        <column name="CODVEICULO" not-null="false"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Promocaoveiculo"/>
+    </set>
+    <set inverse="true" name="aluguels">
+      <key>
+        <column name="CODVEICULO" not-null="false"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Aluguel"/>
+    </set>
+  </class>
+  <!--Todo a HQL deve ficar abaixo disso. Obs: Aqui é Case Sesitive-->
+  <query name="buscarVeiculoPelaPlaca">
+        <![CDATA[from Veiculo V where V.placa = :placaRecebida]]> <!--código HQL, o nome dela dever ser diferente das demais-->
+    </query>
+</hibernate-mapping>

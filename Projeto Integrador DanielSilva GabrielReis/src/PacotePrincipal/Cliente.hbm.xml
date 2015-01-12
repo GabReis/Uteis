@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/04/2013 16:45:26 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="PacotePrincipal.Cliente" table="CLIENTE">
+    <id name="codcliente" type="int">
+      <column name="CODCLIENTE"/>
+      <generator class="increment"/>
+    </id>
+    <many-to-one class="PacotePrincipal.Cliente" fetch="select" name="cliente">
+      <column name="CODMOTORISTA"/>
+    </many-to-one>
+    <many-to-one class="PacotePrincipal.Endereco" fetch="select" name="endereco">
+      <column name="CODENDERECO" not-null="true"/>
+    </many-to-one>
+    <property name="nome" type="string">
+      <column length="150" name="NOME" not-null="true"/>
+    </property>
+    <property name="datanascimento" type="date">
+      <column length="10" name="DATANASCIMENTO" not-null="true"/>
+    </property>
+    <property name="email" type="string">
+      <column length="50" name="EMAIL"/>
+    </property>
+    <property name="numendereco" type="int">
+      <column name="NUMENDERECO" not-null="true"/>
+    </property>
+    <property name="cpf" type="string">
+      <column length="20" name="CPF"/>
+    </property>
+    <property name="numcnh" type="string">
+      <column length="20" name="NUMCNH" not-null="true"/>
+    </property>
+    <property name="tipocnh" type="string">
+      <column length="10" name="TIPOCNH"/>
+    </property>
+    <property name="dataemissaocnh" type="date">
+      <column length="10" name="DATAEMISSAOCNH" not-null="true"/>
+    </property>
+    <property name="datavalidadecnh" type="date">
+      <column length="10" name="DATAVALIDADECNH" not-null="true"/>
+    </property>
+    <property name="cnpj" type="string">
+      <column length="25" name="CNPJ"/>
+    </property>
+    <property name="telefone" type="string">
+      <column length="25" name="TELEFONE" not-null="true"/>
+    </property>
+    <set inverse="true" name="aluguels">
+      <key>
+        <column name="CODCLIENTE" not-null="true"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Aluguel"/>
+    </set>
+    <set inverse="true" name="vendas">
+      <key>
+        <column name="CODCLIENTE" not-null="true"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Venda"/>
+    </set>
+    <set inverse="true" name="clientes">
+      <key>
+        <column name="CODMOTORISTA"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Cliente"/>
+    </set>
+  </class>
+  <query name="BuscaEmailCliente">
+      <![CDATA[select a.cliente from Aluguel a where a.codaluguel = :codAluguelRecebido]]>
+    </query>
+  <query name = "BuscaClientePorDocumento">
+        <![CDATA[from Cliente c where c.cpf = :documentoRecebido or c.cnpj = :documentoRecebido]]>
+        
+    </query>
+</hibernate-mapping>

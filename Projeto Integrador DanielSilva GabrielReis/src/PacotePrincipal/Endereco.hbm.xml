@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/04/2013 16:45:26 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+  <class name="PacotePrincipal.Endereco" table="ENDERECO">
+    <id name="codendereco" type="int">
+      <column name="CODENDERECO"/>
+      <generator class="increment"/>
+    </id>
+    <property name="uf" type="string">
+      <column length="2" name="UF" not-null="true"/>
+    </property>
+    <property name="bairro" type="string">
+      <column length="50" name="BAIRRO" not-null="true"/>
+    </property>
+    <property name="rua" type="string">
+      <column length="50" name="RUA" not-null="true"/>
+    </property>
+    <property name="cep" type="string">
+      <column length="20" name="CEP" not-null="true"/>
+    </property>
+    <property name="complemento" type="string">
+      <column length="150" name="COMPLEMENTO"/>
+    </property>
+    <property name="cidade" type="string">
+      <column length="50" name="CIDADE" not-null="true"/>
+    </property>
+    <set inverse="true" name="fornecedors">
+      <key>
+        <column name="CODENDERECO" not-null="true"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Fornecedor"/>
+    </set>
+    <set inverse="true" name="funcionarios">
+      <key>
+        <column name="CODENDERECO" not-null="true"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Funcionario"/>
+    </set>
+    <set inverse="true" name="clientes">
+      <key>
+        <column name="CODENDERECO" not-null="true"/>
+      </key>
+      <one-to-many class="PacotePrincipal.Cliente"/>
+    </set>
+  </class>
+  <query name="BuscaEnderecoPorCidadeRua">
+      <![CDATA[from Endereco e where e.cidade = :cidadeRecebida and e.rua = :ruaRecebida]]>
+  </query>
+</hibernate-mapping>
